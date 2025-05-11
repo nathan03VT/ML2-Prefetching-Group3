@@ -1,10 +1,554 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My GitHub Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #2c3e50;
+        }
+
+        section {
+            padding: 60px 0;
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .detail-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .detail-card h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .detail-card ul {
+            padding-left: 20px;
+        }
+
+        .detail-card li {
+            margin-bottom: 10px;
+        }
+
+        .code-section {
+            text-align: center;
+        }
+
+        .github-button {
+            display: inline-block;
+            background: #24292e;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+
+        .github-button:hover {
+            background: #444;
+        }
+
+        .pdf-viewer {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .presentation-viewer {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            background: #f0f0f0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .slide-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .slide-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .slide-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .slide-button:hover {
+            background: #2c3e50;
+        }
+
+        .slide-button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .slide-counter {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .tech-badge {
+            background: #e9ecef;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .team-section {
+            text-align: center;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .team-member h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            color: #7f8c8d;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Hello, world! Nathan</h1>
-  <p>Welcome to my GitHub Pages site.</p>
+    <header>
+        <div class="container">
+            <h1>Learning Based Prefetching Strategy</h1>
+            <p class="subtitle">A machine learning approach to predict storage I/O accesses for improved SSD prefetching, achieving up to 51x performance improvements over traditional algorithms</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#demo">Simulation Demo</a></li>
+                <li><a href="#details">Implementation</a></li>
+                <li><a href="#code">Source Code</a></li>
+                <li><a href="#paper">Research Paper</a></li>
+                <li><a href="#presentation">Slides</a></li>
+                <li><a href="#team">Team</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="overview">
+            <h2>Project Overview</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                This project presents a novel machine learning approach to predict storage I/O accesses for improved SSD prefetching. 
+                Traditional prefetching strategies struggle with irregular access patterns and large address spaces. Our neural network-based 
+                solution leverages historical I/O patterns to accurately predict both the offset and size of future storage accesses, 
+                achieving up to 51x performance improvements over traditional algorithms.
+            </p>
+            
+            <div class="tech-stack">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">Machine Learning</span>
+                <span class="tech-badge">Neural Networks</span>
+                <span class="tech-badge">LSTM</span>
+                <span class="tech-badge">Data Analysis</span>
+                <span class="tech-badge">Storage Systems</span>
+                <span class="tech-badge">Prefetching Algorithms</span>
+            </div>
+        </section>
+
+        <section id="demo">
+            <h2>Simulation Demo</h2>
+            <div class="video-container">
+                <video controls poster="video-poster.jpg">
+                    <source src="prefetching-demo.mp4" type="video/mp4">
+                    <source src="prefetching-demo.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                This demo shows our neural network-based prefetcher in action, predicting storage access patterns and achieving higher hit ratios than traditional algorithms.
+            </p>
+        </section>
+
+        <section id="details">
+            <h2>Implementation Details</h2>
+            <div class="project-details">
+                <div class="detail-card">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>Neural network-based prediction of storage access patterns</li>
+                        <li>Dual prediction model: offset and size prediction</li>
+                        <li>Regression approach for exact value prediction</li>
+                        <li>Up to 51x improvement over traditional prefetchers</li>
+                        <li>High prefetch coverage (78.7%) and hit ratio</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Technical Architecture</h3>
+                    <p>Our system consists of:</p>
+                    <ul>
+                        <li>Data preprocessing and feature extraction pipeline</li>
+                        <li>Small neural network model (16x4x1 neurons)</li>
+                        <li>Temporal pattern detection using previous I/O accesses</li>
+                        <li>Prefetching simulation framework</li>
+                        <li>Performance evaluation metrics</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Results & Performance</h3>
+                    <p>Our approach achieved significant improvements:</p>
+                    <ul>
+                        <li>6.6× better than Markov Chain (base 1)</li>
+                        <li>15.4× better than Markov Chain (base 2)</li>
+                        <li>51.2× better than Stride algorithm</li>
+                        <li>Coverage: 78.7% vs 19% (Markov) and 4.4% (Stride)</li>
+                    </ul>
+                </div>
+                
+                <div class="detail-card">
+                    <h3>Future Work</h3>
+                    <p>Planned enhancements include:</p>
+                    <ul>
+                        <li>Deploy model in SSD emulator (FEMU)</li>
+                        <li>Test in real system environments</li>
+                        <li>Explore ML training workload patterns</li>
+                        <li>Implement caching system in emulator</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="code" class="code-section">
+            <h2>Source Code</h2>
+            <p style="margin-bottom: 30px;">Explore our machine learning implementation and prefetching simulation framework</p>
+            <a href="https://github.com/yourusername/learning-based-prefetching" target="_blank" class="github-button">
+                View on GitHub
+            </a>
+            <a href="https://github.com/yourusername/learning-based-prefetching/archive/main.zip" class="github-button">
+                Download Source
+            </a>
+        </section>
+
+        <section id="paper">
+            <h2>Research Paper</h2>
+            <p style="text-align: center; margin-bottom: 30px;">
+                Read our detailed research paper on learning-based prefetching strategies
+            </p>
+            <iframe src="learning-based-prefetching-paper.pdf" class="pdf-viewer"></iframe>
+            <p style="text-align: center; margin-top: 20px;">
+                <a href="learning-based-prefetching-paper.pdf" target="_blank" class="github-button">
+                    Download PDF
+                </a>
+            </p>
+        </section>
+
+        <section id="presentation">
+            <h2>Project Presentation</h2>
+            <div class="presentation-viewer">
+                <div class="slide-container">
+                    <img id="slide-image" src="slides/slide-1.jpg" alt="Presentation slide">
+                </div>
+                <div class="slide-controls">
+                    <button class="slide-button" id="prev-slide">Previous</button>
+                    <span class="slide-counter">
+                        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+                    </span>
+                    <button class="slide-button" id="next-slide">Next</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="team-section">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="team/hansen.jpg" alt="Hansen Idden">
+                    <h3>Hansen Idden</h3>
+                    <p>Team Member</p>
+                </div>
+                <div class="team-member">
+                    <img src="team/rizky.jpg" alt="Rizky Ramadhana">
+                    <h3>Rizky Ramadhana P. K.</h3>
+                    <p>Team Member</p>
+                </div>
+                <div class="team-member">
+                    <img src="team/nathan.jpg" alt="Nathan Roberts">
+                    <h3>Nathan Roberts</h3>
+                    <p>Team Member</p>
+                </div>
+                <div class="team-member">
+                    <img src="team/daniel.jpg" alt="Daniel Kang">
+                    <h3>Daniel (Hyun Myung) Kang</h3>
+                    <p>Team Member</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Learning Based Prefetching Strategy. All rights reserved.</p>
+            <p>CS5806 Final Project - Virginia Tech</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Presentation slide viewer
+        let currentSlide = 1;
+        const totalSlides = 26; // Update this based on your actual number of slides
+        
+        const slideImage = document.getElementById('slide-image');
+        const currentSlideSpan = document.getElementById('current-slide');
+        const totalSlidesSpan = document.getElementById('total-slides');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        
+        totalSlidesSpan.textContent = totalSlides;
+        
+        function updateSlide() {
+            slideImage.src = `slides/slide-${currentSlide}.jpg`;
+            currentSlideSpan.textContent = currentSlide;
+            
+            prevButton.disabled = currentSlide === 1;
+            nextButton.disabled = currentSlide === totalSlides;
+        }
+        
+        prevButton.addEventListener('click', () => {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+        
+        nextButton.addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+        
+        // Keyboard navigation for slides
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+        
+        // Initialize
+        updateSlide();
+    </script>
 </body>
 </html>
